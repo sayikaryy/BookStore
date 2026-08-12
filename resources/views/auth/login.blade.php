@@ -118,13 +118,13 @@
 
                 <!-- Submit Button -->
                 <button type="submit" class="w-full py-3.5 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl text-sm shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/40 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-900">
-                    <!-- Sign In to Dashboard<span class="text-xs text-slate-400">Default: password</span> -->
+                    Sign In to Dashboard<span class="text-xs text-slate-400"></span>
                 </button>
             </form>
 
             <div class="mt-6 text-center border-t border-slate-700/60 pt-4">
                 <p class="text-xs text-slate-400">
-                    BookVerse FinTech Project &bull; Admin Access Only
+                    BookVerse System &bull; Admin Access Only
                 </p>
             </div>
         </div>

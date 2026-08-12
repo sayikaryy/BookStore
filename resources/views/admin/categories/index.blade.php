@@ -107,7 +107,10 @@
                                     ✏️
                                 </a>
                                 <button type="button" 
-                                        onclick="openDeleteModal('{{ $category->id }}', '{{ addslashes($category->name) }}', {{ $category->books_count }})" 
+                                        data-id="{{ $category->id }}"
+                                        data-name="{{ $category->name }}"
+                                        data-books-count="{{ $category->books_count }}"
+                                        onclick="openDeleteModal(this)" 
                                         class="p-1.5 text-slate-500 hover:text-rose-600 transition-colors" 
                                         title="Delete Category">
                                     🗑️
@@ -171,8 +174,11 @@
 <script>
     let activeDeleteId = null;
 
-    function openDeleteModal(id, name, booksCount) {
-        activeDeleteId = id;
+    function openDeleteModal(btn) {
+        activeDeleteId = btn.dataset.id;
+        const name = btn.dataset.name;
+        const booksCount = parseInt(btn.dataset.booksCount || 0);
+
         document.getElementById('delete-category-name').innerText = name;
         const warning = document.getElementById('delete-warning-books');
         if (booksCount > 0) {

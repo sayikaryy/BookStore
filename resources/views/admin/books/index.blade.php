@@ -159,7 +159,9 @@
                                     ✏️
                                 </a>
                                 <button type="button" 
-                                        onclick="openDeleteModal('{{ $book->id }}', '{{ addslashes($book->title) }}')" 
+                                        data-id="{{ $book->id }}"
+                                        data-title="{{ $book->title }}"
+                                        onclick="openDeleteModal(this)" 
                                         class="p-1.5 text-slate-500 hover:text-rose-600 transition-colors" 
                                         title="Delete Book">
                                     🗑️
@@ -221,9 +223,9 @@
 <script>
     let activeDeleteBookId = null;
 
-    function openDeleteModal(id, title) {
-        activeDeleteBookId = id;
-        document.getElementById('delete-book-title').innerText = title;
+    function openDeleteModal(btn) {
+        activeDeleteBookId = btn.dataset.id;
+        document.getElementById('delete-book-title').innerText = btn.dataset.title;
         document.getElementById('delete-book-modal').classList.remove('hidden');
     }
 
