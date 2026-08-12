@@ -1,2 +1,18 @@
-*
+# Allow cover images and media assets to be tracked by Git so team members get all pictures
 !.gitignore
+!covers/
+!covers/*
+!covers/**/*
+!images/
+!images/*
+!images/**/*
+!uploads/
+!uploads/*
+!uploads/**/*
+!*.jpg
+!*.jpeg
+!*.png
+!*.webp
+!*.gif
+!*.svg
+
