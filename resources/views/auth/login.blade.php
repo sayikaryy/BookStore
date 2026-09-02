@@ -41,7 +41,7 @@
                 <p class="text-slate-400 text-xs mt-1">Enter your credentials to access system management</p>
             </div>
 
-            <!-- Demo Credentials Banner -->
+            Demo Credentials Banner
             <div class="mb-6 bg-indigo-950/60 border border-indigo-500/30 rounded-xl p-3.5 text-xs text-indigo-200">
                 <div class="flex items-center space-x-2 font-semibold text-indigo-300 mb-1">
                     <!-- <svg class="w-4 h-4 text-indigo-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
