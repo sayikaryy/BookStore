@@ -22,7 +22,7 @@ class AdminController extends Controller
         }
 
         $totalCategories = Category::count();
-        $recentBooks = Book::with('category')->latest()->take(5)->get();
+        $recentBooks = Book::with('category')->latest()->take(10)->get();
         $recentOrders = Order::with('user')->latest()->take(5)->get();
 
         return view('admin.dashboard', compact(

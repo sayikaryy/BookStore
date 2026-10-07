@@ -17,11 +17,26 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check()) {
+        $isApi = $request->expectsJson() || $request->is('api/*');
+        $user = $request->user();
+
+        if (!$user) {
+            if ($isApi) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Unauthenticated. Bearer token required.',
+                ], 401);
+            }
             return redirect()->route('login')->with('error', 'Please log in to access the admin portal.');
         }
 
-        if (Auth::user()->role !== 'admin') {
+        if ($user->role !== 'admin') {
+            if ($isApi) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Access denied. Administrator privileges required.',
+                ], 403);
+            }
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
