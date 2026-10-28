@@ -414,7 +414,6 @@ class DatabaseSeeder extends Seeder
                 'amount' => 34.50,
                 'currency' => 'USD',
                 'status' => 'paid',
-                'qr_string' => '00020101021229370016bakong@nbckh0010108nbc_khqr520459995303840540534.505802KH5912BookVerseKH6010Phnom Penh6304A4B1',
                 'notes' => 'Settled via NBC Bakong KHQR',
                 'paid_at' => now()->subHours(4),
             ]

@@ -41,20 +41,6 @@
                 <p class="text-slate-400 text-xs mt-1">Enter your credentials to access system management</p>
             </div>
 
-            Demo Credentials Banner
-            <div class="mb-6 bg-indigo-950/60 border border-indigo-500/30 rounded-xl p-3.5 text-xs text-indigo-200">
-                <div class="flex items-center space-x-2 font-semibold text-indigo-300 mb-1">
-                    <!-- <svg class="w-4 h-4 text-indigo-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg> -->
-                    <!-- <span>Default Admin Credentials</span> -->
-                </div>
-                <div class="space-y-0.5 font-mono text-[11px] text-slate-300">
-                    <p><span class="text-slate-400">Email:</span> admin@bookverse.com</p>
-                    <p><span class="text-slate-400">Password:</span> password</p>
-                </div>
-            </div>
-
             <!-- Global Error / Flash Message -->
             @if(session('error'))
                 <div class="mb-6 bg-rose-500/10 border border-rose-500/30 text-rose-400 text-sm p-3.5 rounded-xl flex items-start space-x-2.5">
@@ -89,10 +75,10 @@
                         <input id="email" 
                                type="email" 
                                name="email" 
-                               value="{{ old('email', 'admin@bookverse.com') }}" 
+                               value="{{ old('email') }}" 
                                required 
                                autofocus
-                               placeholder="admin@bookverse.com"
+                               placeholder="admin@example.com"
                                class="w-full pl-11 pr-4 py-3 bg-slate-900/80 border {{ $errors->has('email') ? 'border-rose-500 focus:ring-rose-500' : 'border-slate-700 focus:border-indigo-500 focus:ring-indigo-500' }} rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-all">
                     </div>
                     @error('email')

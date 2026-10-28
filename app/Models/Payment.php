@@ -12,12 +12,14 @@ class Payment extends Model
     protected $fillable = [
         'order_id',
         'transaction_id',
-        'payment_method', // ABA_KHQR, ACLEDA_KHQR, BAKONG_KHQR, CARD, CASH_ON_DELIVERY
-        'bank_provider',   // ABA, ACLEDA, BAKONG, STRIPE, CASH
+        'payment_method', // BAKONG_KHQR, CASH_ON_DELIVERY
+        'bank_provider',  // BAKONG, CASH
         'amount',
         'currency',       // USD, KHR
         'status',         // pending, paid, failed, refunded
         'qr_string',
+        'md5_hash',
+        'deeplink',
         'qr_image_url',
         'notes',
         'paid_at',

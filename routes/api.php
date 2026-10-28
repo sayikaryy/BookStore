@@ -48,9 +48,6 @@ $defineRoutes = function () {
     Route::get('/categories/{id}', [CategoryController::class, 'show']);
     Route::get('/categories/{id}/books', [CategoryController::class, 'books']);
 
-    // Public payment webhook simulation
-    Route::post('/payments/webhook', [PaymentController::class, 'webhook']);
-
     // -------------------------------------------------------------
     // Protected Routes (Requires Sanctum Bearer Token)
     // -------------------------------------------------------------
@@ -92,11 +89,13 @@ $defineRoutes = function () {
             Route::get('/{id}/receipt', [OrderController::class, 'receipt']);
         });
 
-        // Payments & Cambodian QR Gateways Simulation
+        // Payments (Bakong KHQR, Cash on Delivery)
         Route::prefix('payments')->group(function () {
             Route::post('/', [PaymentController::class, 'store']);
-            Route::get('/{id}', [PaymentController::class, 'show']);
             Route::post('/generate-qr', [PaymentController::class, 'generateQr']);
+            Route::post('/check-status', [PaymentController::class, 'checkStatus']);
+            Route::get('/{id}', [PaymentController::class, 'show']);
+            Route::get('/{id}/check-status', [PaymentController::class, 'checkStatus']);
             Route::post('/{id}/simulate-success', [PaymentController::class, 'simulateSuccess']);
         });
 

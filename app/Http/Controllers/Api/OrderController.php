@@ -67,7 +67,7 @@ class OrderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'shipping_address' => 'required|string',
-            'payment_method' => 'required|string', // ABA_KHQR, ACLEDA_KHQR, BAKONG_KHQR, CARD, CASH_ON_DELIVERY
+            'payment_method' => 'required|string|in:BAKONG_KHQR,CASH_ON_DELIVERY',
             'delivery_method' => 'nullable|string',
             'phone' => 'nullable|string',
             'note' => 'nullable|string',
@@ -174,22 +174,8 @@ class OrderController extends Controller
             $paymentMethod = strtoupper(str_replace(' ', '_', $request->payment_method));
             $txnId = 'TXN-' . str_replace('_', '-', $paymentMethod) . '-' . strtoupper(Str::random(6));
 
-            $bankProvider = 'CASH';
-            $qrString = null;
-            if (str_contains($paymentMethod, 'ABA')) {
-                $bankProvider = 'ABA';
-                $qrString = "00020101021229370016bakong@abaa00010108abaa_usd520459995303840540" . number_format($totalAmount, 2, '.', '') . "5802KH5912BookVerseKH6010Phnom Penh6304" . strtoupper(Str::random(4));
-            } elseif (str_contains($paymentMethod, 'ACLEDA')) {
-                $bankProvider = 'ACLEDA';
-                $qrString = "00020101021229370016bakong@aclb00010108aclb_usd520459995303840540" . number_format($totalAmount, 2, '.', '') . "5802KH5912BookVerseKH6010Phnom Penh6304" . strtoupper(Str::random(4));
-            } elseif (str_contains($paymentMethod, 'BAKONG') || str_contains($paymentMethod, 'KHQR')) {
-                $bankProvider = 'BAKONG';
-                $qrString = "00020101021229370016bakong@nbckh0010108nbc_khqr520459995303840540" . number_format($totalAmount, 2, '.', '') . "5802KH5912BookVerseKH6010Phnom Penh6304" . strtoupper(Str::random(4));
-            } elseif (str_contains($paymentMethod, 'CARD')) {
-                $bankProvider = 'CARD';
-            }
-
-            $paymentStatus = ($paymentMethod === 'CASH_ON_DELIVERY') ? 'pending' : 'pending';
+            // Bakong KHQR is generated on demand via POST /payments/generate-qr
+            $bankProvider = $paymentMethod === 'BAKONG_KHQR' ? 'BAKONG' : 'CASH';
 
             $payment = Payment::create([
                 'order_id' => $order->id,
@@ -198,8 +184,7 @@ class OrderController extends Controller
                 'bank_provider' => $bankProvider,
                 'amount' => $totalAmount,
                 'currency' => 'USD',
-                'status' => $paymentStatus,
-                'qr_string' => $qrString,
+                'status' => 'pending',
                 'paid_at' => null,
             ]);
 
